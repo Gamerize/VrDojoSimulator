@@ -7,7 +7,10 @@ public class SliceListener : MonoBehaviour
     public Slicer slicer;
     private void OnTriggerEnter(Collider other)
     {
-        slicer.isTouched = true;
-        Debug.Log("connected");    
+        if (other.gameObject.layer == LayerMask.NameToLayer("Sliceable"))
+        {
+            slicer.isTouched = true;
+            Debug.Log("connected");
+        }
     }
 }

@@ -18,6 +18,8 @@ public class Slicer : MonoBehaviour
             {
                 SlicedHull slicedObject = SliceObject(objectToBeSliced.gameObject, materialAfterSlice);
 
+                if (slicedObject == null) continue;
+
                 GameObject upperHullGameobject = slicedObject.CreateUpperHull(objectToBeSliced.gameObject, materialAfterSlice);
                 GameObject lowerHullGameobject = slicedObject.CreateLowerHull(objectToBeSliced.gameObject, materialAfterSlice);
 
@@ -27,7 +29,17 @@ public class Slicer : MonoBehaviour
                 MakeItPhysical(upperHullGameobject);
                 MakeItPhysical(lowerHullGameobject);
 
-                Destroy(objectToBeSliced.gameObject);
+
+                upperHullGameobject.layer = LayerMask.NameToLayer("Sliceable");
+                lowerHullGameobject.layer = LayerMask.NameToLayer("Sliceable");
+            }
+
+            foreach (Collider objectToBeSliced in objectsToBeSliced)
+            {
+                if (objectToBeSliced != null)
+                {
+                    Destroy(objectToBeSliced.gameObject);
+                }
             }
         }
     }
