@@ -5,6 +5,7 @@ public class Slicer : MonoBehaviour
     public Material materialAfterSlice;
     public LayerMask sliceMask;
     public bool isTouched;
+    public AudioManager Audio;
 
     private void Update()
     {
@@ -29,6 +30,7 @@ public class Slicer : MonoBehaviour
                 MakeItPhysical(upperHullGameobject);
                 MakeItPhysical(lowerHullGameobject);
 
+                Audio.playAudio("Slash");
 
                 upperHullGameobject.layer = LayerMask.NameToLayer("Sliceable");
                 lowerHullGameobject.layer = LayerMask.NameToLayer("Sliceable");
